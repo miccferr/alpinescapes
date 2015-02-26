@@ -1,0 +1,201 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+  <title>Alpinescapes</title>
+  
+
+  
+  <!-- DA SISTEMARE  tieni conto che alla fine devi avere 1 solo css ed 1 solo js-->
+  <!-- CSS -->
+  <link rel="stylesheet" href="../bower_components/Leaflet.EditInOSM/Leaflet.EditInOSM.css">
+  <link rel="stylesheet" href="../bower_components/sidebar-v2/css/leaflet-sidebar.min.css">  
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!--  styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+
+
+  <!-- SCRIPTS -->
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+  <!-- bower:js -->      
+  <script src="scripts/js/jquery/dist/jquery.js"></script>
+  <script src="scripts/js/wikigeo/index.js"></script>
+  <script src="scripts/js/jquery.ba-bbq/index.js"></script>
+  <script src="scripts/js/osmtogeojson/index.js"></script>
+  <script src="scripts/js/Leaflet.EditInOSM/Leaflet.EditInOSM.js"></script>
+  <script src="scripts/js/leaflet.spin.js"></script>
+  <!-- endbower -->
+  <!-- build:js scripts/plugins.js -->
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+  <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+  <script src="../bower_components/sidebar-v2/js/leaflet-sidebar.js"></script>
+  <script src="../bower_components/sidebar-v2/js/jquery-sidebar.js"></script>        
+  <!-- endbuild --> 
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+  <!-- import data -->
+  <script src="scripts/db_valsa_fin.json"></script> 
+  
+  
+</head>
+<body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+      
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!-- tolta classe navbar-brand -->
+          <h1 class=" text-muted">Alpinescapes</h1>
+        </div>
+        <ul class="nav nav-pills pull-right">
+          <li><a href="#"><img src="images/logo_comunita.gif" alt="logo_comunita"></a></li>
+          <li><a href="#"><img src="images/logo_wiki.png" alt="logo_wiki"></a></li>
+          <li><a href="#"><img src="images/logo_polimi.jpg" alt="logo_polimi"></a></li>
+        </ul>
+      </div>
+
+      <!-- Container Mappa -->
+      <div class="row row-mappa">
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar collapsed ">
+          <!-- Nav tabs -->
+          <ul class="sidebar-tabs" role="tablist">
+            <!-- Le icone sono quelle di Font Awesome, basta che cambi fa-qualcosa in fa-qualcosaltro -->
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+            <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="sidebar-content active">
+            <div class="sidebar-pane" id="home"><h1>Punti d'interesse</h1> </div>
+            <div class="sidebar-pane" id="profile"><h1>Percorsi</h1></div>
+            <div class="sidebar-pane" id="messages"><h1>Messages</h1></div>
+            <div class="sidebar-pane" id="settings">
+              <h1>About</h1>
+              <div class="btn-group">
+               <select name="language" class="selectpicker">
+                <option value="niente"> Wikipedia OFF</option>            
+                <option value="id">Bahasa Indonesia Wikipedia </option>
+                <option value="ca">Català Wikipedia </option>
+                <option value="de">Deutsch Wikipedia </option>
+                <option value="en">English Wikipedia </option>
+                <option value="eu">Euskara Wikipedia </option>
+                <option value="fr">Français Wikipedia </option>
+                <option value="ilo">Ilokano Wikipedia </option>
+                <option value="it">Italiano Wikipedia </option>
+                <option value="la">Latina Wikipedia </option>
+                <option value="hu">Magyar Wikipedia </option>
+                <option value="nds-nl">Nedersaksisch Wikipedia </option>
+                <option value="no">Norsk (Bokmål) Wikipedia </option>
+                <option value="nds">Plattdüütsch Wikipedia </option>
+                <option value="pl">Polski Wikipedia </option>
+                <option value="sv">Svenska Wikipedia </option>
+                <option value="vi">Tiếng Việt Wikipedia </option>
+                <option value="diq">Zazaki Wikipedia </option>
+                <option value="is">Íslenska Wikipedia </option>
+                <option value="ru">Русский Wikipedia </option>
+                <option value="uk">Українська Wikipedia </option>
+                <option value="fa">فارسی Wikipedia </option>
+                <option value="arz">مصرى (Maṣrī) Wikipedia </option>
+                <option value="ml">മലയാളം Wikipedia </option>
+                <option value="th">ไทย Wikipedia </option>
+                <option value="zh">中文 Wikipedia </option>
+                <option value="ja">日本語 Wikipedia </option>
+                <option value="ko">한국어 Wikipedia </option>
+              </select>
+              <br>
+              <select name="valsa-class" class="selectpicker">
+                <option value="no-valsa">ValsassinaCultura OFF</option>            
+                <option value="valsa">ValsassinaCultura ON</option>
+              </select>
+              <br>
+              <select name="ovp-class" class="selectpicker">
+                <option value="no-ovp"> OpenStreetMap OFF</option>            
+                <option value="ovp">OpenStreetMap ON</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>     
+
+      <!-- Mappa vera e propria -->
+      <div id="map" class="sidebar-map"> </div>
+      <!-- Fine mappa -->
+    </div>
+
+    <!-- Container con scritte di prova -->
+    <div class="row-fluid marketing">
+      <div class="col-lg-6">
+        <h4>HTML5 Boilerplate</h4>
+        <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+        <h4>Sass</h4>
+        <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
+        <h4>Bootstrap</h4>
+        <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+        <h4>Modernizr</h4>
+        <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
+      </div>
+      <div class="col-lg-6">
+        <h4>Altre Scritte</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h4>Altre Scritte</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in repreh</p>
+          </div>
+        </div>
+
+        <!-- Container Footer -->
+        <div class="footer">
+          <p>♥ from the Yeoman team</p>
+        </div>
+      </div>
+
+      
+<!-- Utility map per prototipare rapidamente dei cambiamenti al codice -->
+<!--       // Provide your access token
+      // L.mapbox.accessToken = 'pk.eyJ1IjoiY2FydG9taWtlIiwiYSI6IjZfYkZqajAifQ.d6uTFMLHEgrjpFmD_e9kRQ';
+      // Create a map in the div #map
+      // L.mapbox.map('map', 'examples.map-zr0njcqy', 
+      // {
+      //   // edit in OSM 
+      //   editInOSMControlOptions: {},
+      //   // abilito zoom di deafult di leaflet
+      //   zoomControl: true 
+      // });      
+      
+      // /*sidebar*/
+      // var sidebar = L.control.sidebar('sidebar').addTo(map); -->
+      
+
+
+
+    </body>
+    </html>
