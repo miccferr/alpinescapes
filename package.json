@@ -1,0 +1,19 @@
+{
+  "name": "alpinescapes",
+  "version": "1.0.0",
+  "description": "Webmap part of a project which focuses on open data and the Creative Commons attribution-share alike license to provide access to existing content on the Alps (cultural and natural heritage, geography, anthropology...) ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miccferr/alpinescapes"
+  },
+  "author": "Michele Ferretti, Paolo Tagliolato",
+  "license": "Public Domain",
+  "bugs": {
+    "url": "https://github.com/miccferr/alpinescapes/issues"
+  },
+  "homepage": "https://github.com/miccferr/alpinescapes"
+}
