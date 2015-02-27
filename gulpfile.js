@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
 	es = require('event-stream'),
 	concat = require('gulp-concat'),
+	ugliMin= require('gulp-uglifyjs'),
 	sass = require('gulp-ruby-sass'),
+	rename = require('gulp-rename'),
 	targetCssDir = 'styles',
 	gutil = require('gulp-util'),
 	autoprefix = require('gulp-autoprefixer');
@@ -12,32 +14,35 @@ var gulp = require('gulp'),
 gulp.task('css', function(){
 
 	var vendorCSS = gulp.src(['node_modules/bootstrap/**/*.css','node_modules/leaflet-editinosm/**/*.css'] );
-	var mySASS = sass('sass/main.sass', { style: 'compressed' }).on('error', gutil.log);
+	var mySASS = sass('app/sass/main.sass', { style: 'compressed' }).on('error', gutil.log);
 	
 	return es.concat(vendorCSS,mySASS)
-	.pipe(concat('styles.css'))
+	.pipe(concat('app/styles.css'))
 	.pipe(autoprefix('last 2 version'))
 	.pipe(gulp.dest(targetCssDir));
 });
 
 
+// JS uno
+gulp.task('js-uno', function(){
+	var vendorScripts = gulp.src('app/vendor/*.js'),	
+		$ = require('jquery'),
+		Modernizr = require('modernizr'),
+		L = require('leaflet'),
+		LEditinosm = require('leaflet-editinosm');
+		
+	return es.ugliMin(vendorFiles, $, Modernizr, L, LEditinosm)
+	.pipe(gulp.rename('bundleUno.js'))
+	.pipe(gulp.dest('app/scripts'));
+});
 
-// gulp.task('sass', function () {
-// 	return sass('sass/*.scss')	
-// 	.pipe(gulp.dest('dest'));
-// });
+// JS due
+gulp.task('js-due',['js-uno'], function(){
+	var bundleUno = gulp.src('app/scripts/bundleUno.js');
+	var myScript = gulp.src('app/scripts/main.js')
+	
+	return es.ugliMin(bundleUno, myScript)
+	.pipe(gulp.rename('bundleTot.js'))
+	.pipe(gulp.dest('scripts'));
 
-// var es = require('event-stream'),
-// concat = require('gulp-concat');
-
-// // CSS e SASS
-// gulp.task('css', function(){
-// 	var vendorFiles = gulp.src('/glob/for/vendor/files');
-// 	var appFiles = gulp.src(sassDir + '/main.scss')
-// 	.pipe(sass({ style: 'compressed' }).on('error', gutil.log));
-
-// 	return es.concat(vendorFiles, appFiles)
-// 	.pipe(concat('output-file-name.css'))
-// 	.pipe(autoprefix('last 10 version'))
-// 	.pipe(gulp.dest(targetCssDir));
-// });
+});
